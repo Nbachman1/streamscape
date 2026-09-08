@@ -29,7 +29,7 @@ export function SiteHeader() {
         </nav>
         <div className="ml-auto flex items-center gap-2">
           <span className="hidden text-xs text-muted-foreground sm:inline">
-            Spotify streaming · 2020–2025
+            Synthetic streaming dataset · 2020–2025
           </span>
           <ThemeToggle />
         </div>

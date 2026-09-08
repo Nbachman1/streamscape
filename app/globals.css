@@ -72,8 +72,29 @@
 /* subtle grid texture for the hero */
 .hero-grid {
   background-image:
-    linear-gradient(hsl(var(--border) / 0.5) 1px, transparent 1px),
-    linear-gradient(90deg, hsl(var(--border) / 0.5) 1px, transparent 1px);
-  background-size: 48px 48px;
-  mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 40%, transparent 100%);
+    linear-gradient(hsl(var(--border) / 0.6) 1px, transparent 1px),
+    linear-gradient(90deg, hsl(var(--border) / 0.6) 1px, transparent 1px);
+  background-size: 44px 44px;
+  mask-image: radial-gradient(ellipse 75% 60% at 30% 0%, #000 35%, transparent 100%);
+}
+
+/* green glow behind the hero */
+.hero-glow {
+  background: radial-gradient(
+    60% 80% at 15% 0%,
+    hsl(var(--primary) / 0.22),
+    transparent 70%
+  );
+}
+
+/* thin accent bar on stat cards */
+.accent-top {
+  position: relative;
+}
+.accent-top::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 2px;
+  background: linear-gradient(90deg, hsl(var(--primary)), transparent 65%);
 }

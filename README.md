@@ -1,8 +1,12 @@
 # Streamscape
 
-A Spotify streaming-analytics explorer built on **Next.js (App Router) + shadcn/ui + Supabase**.
+A streaming-analytics explorer built on **Next.js (App Router) + shadcn/ui + Supabase**.
 It turns `spotify_artist_streaming_2020_2025.csv` — 50,000 tracks from 500 artists across
 20 genres and 30 markets — into a browsable dashboard.
+
+> **Note:** the dataset is **synthetic**. Artist names and every streaming/popularity
+> figure are procedurally generated for analysis practice — realistic in distribution,
+> but not real artists or real Spotify metrics.
 
 ## Features
 

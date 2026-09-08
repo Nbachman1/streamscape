@@ -7,9 +7,9 @@ import { SiteHeader } from "@/components/site-header";
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 
 export const metadata: Metadata = {
-  title: "Streamscape — Spotify streaming analytics, 2020–2025",
+  title: "Streamscape — synthetic streaming analytics, 2020–2025",
   description:
-    "Explore 50,000 tracks from 500 artists: streams, popularity, audio features, and release trends across 20 genres and 30 markets.",
+    "Explore a synthetic dataset of 50,000 tracks from 500 artists: streams, popularity, audio features, and release trends across 20 genres and 30 markets. Figures are procedurally generated, not real Spotify data.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -20,9 +20,16 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <SiteHeader />
           <main className="container py-8">{children}</main>
           <footer className="border-t border-border/60 py-6">
-            <div className="container text-xs text-muted-foreground">
-              Built with Next.js, shadcn/ui, and Supabase · Dataset:{" "}
-              <code>spotify_artist_streaming_2020_2025</code>
+            <div className="container space-y-1 text-xs text-muted-foreground">
+              <p>
+                Built with Next.js, shadcn/ui, and Supabase · Dataset:{" "}
+                <code>spotify_artist_streaming_2020_2025</code>
+              </p>
+              <p>
+                Synthetic data — artist names and streaming figures are procedurally
+                generated for analysis practice and do not represent real artists or
+                Spotify metrics.
+              </p>
             </div>
           </footer>
         </ThemeProvider>

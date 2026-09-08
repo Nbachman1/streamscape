@@ -13,7 +13,7 @@ export function StatCard({
   className?: string;
 }) {
   return (
-    <Card className={cn("overflow-hidden", className)}>
+    <Card className={cn("accent-top overflow-hidden", className)}>
       <CardContent className="p-5">
         <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
           {label}

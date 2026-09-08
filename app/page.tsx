@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, Database, Info } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { StatCard } from "@/components/stat-card";
@@ -30,35 +30,50 @@ export default async function DashboardPage() {
   return (
     <div className="space-y-10">
       {/* hero */}
-      <section className="relative overflow-hidden rounded-2xl border bg-card px-6 py-12 md:px-10">
+      <section className="relative overflow-hidden rounded-2xl border bg-card px-6 py-14 md:px-12">
+        <div className="hero-glow pointer-events-none absolute inset-0" />
         <div className="hero-grid pointer-events-none absolute inset-0" />
         <div className="relative max-w-2xl">
-          <Badge variant="outline" className="mb-4">
-            2020 – 2025 · 20 genres · 30 markets
-          </Badge>
+          <div className="mb-5 flex flex-wrap items-center gap-2">
+            <Badge className="gap-1.5">
+              <Database className="h-3 w-3" /> Synthetic dataset
+            </Badge>
+            <Badge variant="outline">2020–2025 · 20 genres · 30 markets</Badge>
+          </div>
           <h1 className="text-3xl font-semibold tracking-tight md:text-5xl">
             The shape of six years in streaming.
           </h1>
           <p className="mt-4 text-muted-foreground md:text-lg">
-            Streamscape turns {full(overview.total_tracks)} Spotify tracks into a browsable
-            map of streams, popularity, and the audio DNA behind them.
+            Streamscape turns {full(overview.total_tracks)} tracks from a synthetic
+            streaming dataset into a browsable map of plays, popularity, and the
+            audio DNA behind them.
           </p>
-          <div className="mt-6 flex flex-wrap gap-3">
+          <div className="mt-7 flex flex-wrap gap-3">
             <Link
               href="/tracks"
-              className="inline-flex items-center gap-1.5 rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90"
+              className="inline-flex items-center gap-1.5 rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow-sm transition-colors hover:bg-primary/90"
             >
               Browse tracks <ArrowUpRight className="h-4 w-4" />
             </Link>
             <Link
               href="/artists"
-              className="inline-flex items-center gap-1.5 rounded-md border px-4 py-2 text-sm font-medium hover:bg-accent"
+              className="inline-flex items-center gap-1.5 rounded-md border px-4 py-2 text-sm font-medium transition-colors hover:bg-accent"
             >
               Artist leaderboard
             </Link>
           </div>
         </div>
       </section>
+
+      {/* disclaimer */}
+      <div className="flex items-start gap-3 rounded-lg border border-primary/20 bg-primary/5 px-4 py-3 text-sm">
+        <Info className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
+        <p className="text-muted-foreground">
+          <span className="font-medium text-foreground">Sample data.</span> Artists,
+          tracks, and every figure on this site are procedurally generated for
+          analysis practice — realistic in shape, but not real Spotify data.
+        </p>
+      </div>
 
       {/* stat row */}
       <section className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
@@ -68,7 +83,7 @@ export default async function DashboardPage() {
         <StatCard
           label="Avg. popularity"
           value={`${overview.avg_popularity}`}
-          sub="Spotify score, 0–100"
+          sub="popularity score, 0–100"
         />
       </section>
 
