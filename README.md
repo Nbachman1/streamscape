@@ -46,14 +46,20 @@ artists ──1:N──> tracks
 ### 1. Supabase
 
 1. Create a project at [supabase.com](https://supabase.com).
-2. **SQL Editor → New query →** paste all of `supabase/schema.sql` → **Run**.
-3. Load the data:
+2. Click **Connect** in the top bar → **Connection string** → **URI** → copy the
+   **Session pooler** string (port 5432). It looks like
+   `postgresql://postgres.<ref>:<db-password>@aws-0-<region>.pooler.supabase.com:5432/postgres`
+   — replace `<db-password>` with your database password.
+3. From the project folder, create the schema **and** load all 50k rows in one command:
    ```bash
-   pip install pandas psycopg2-binary python-dotenv
-   cp .env.example .env            # fill in SUPABASE_DB_URL (Project Settings → Database → Connection string → URI)
-   python scripts/seed.py data/spotify_artist_streaming_2020_2025.csv
+   py -m pip install pandas psycopg2-binary python-dotenv   # once
+   copy .env.example .env                                    # then edit .env, set SUPABASE_DB_URL
+   py scripts/seed.py
    ```
-   Expect `Done. artists=500  tracks=50,000`.
+   Expect `Done.  artists=500  tracks=50,000`.
+
+   (The script runs `supabase/schema.sql` for you. To load data without touching the
+   schema, use `py scripts/seed.py --skip-schema`.)
 
 ### 2. Local dev
 
