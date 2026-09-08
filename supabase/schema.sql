@@ -99,39 +99,46 @@ order by total_streams desc;
 create or replace function public.overview_stats()
 returns table (total_tracks bigint, total_artists bigint, total_streams bigint, avg_popularity numeric)
 language sql stable as $$
-  select count(*)::bigint,
-         (select count(*) from public.artists)::bigint,
-         sum(stream_count)::bigint,
-         round(avg(popularity), 1)
-  from public.tracks;
+  select count(*)::bigint                              as total_tracks,
+         (select count(*) from public.artists)::bigint as total_artists,
+         sum(t.stream_count)::bigint                   as total_streams,
+         round(avg(t.popularity), 1)                   as avg_popularity
+  from public.tracks t;
 $$;
 
 create or replace function public.streams_by_year()
 returns table (release_year smallint, total_streams bigint, track_count bigint, avg_popularity numeric)
 language sql stable as $$
-  select release_year, sum(stream_count)::bigint, count(*)::bigint, round(avg(popularity), 1)
-  from public.tracks
-  group by release_year
-  order by release_year;
+  select t.release_year                as release_year,
+         sum(t.stream_count)::bigint   as total_streams,
+         count(*)::bigint              as track_count,
+         round(avg(t.popularity), 1)   as avg_popularity
+  from public.tracks t
+  group by t.release_year
+  order by t.release_year;
 $$;
 
 create or replace function public.market_stats()
 returns table (market text, total_streams bigint, track_count bigint)
 language sql stable as $$
-  select market, sum(stream_count)::bigint, count(*)::bigint
-  from public.tracks
-  group by market
-  order by total_streams desc;
+  select t.market                    as market,
+         sum(t.stream_count)::bigint as total_streams,
+         count(*)::bigint            as track_count
+  from public.tracks t
+  group by t.market
+  order by sum(t.stream_count) desc;
 $$;
 
 create or replace function public.artist_genre_mix(a_id bigint)
 returns table (genre text, track_count bigint, total_streams bigint)
 language sql stable as $$
-  select genre, count(*)::bigint, sum(stream_count)::bigint
-  from public.tracks
-  where artist_id = a_id
-  group by genre
-  order by total_streams desc;
+  select t.genre                     as genre,
+         count(*)::bigint            as track_count,
+         sum(t.stream_count)::bigint as total_streams
+  from public.tracks t
+  where t.artist_id = a_id
+  group by t.genre
+  order by sum(t.stream_count) desc;
 $$;
 
 -- ----------------------------------------------------------------------------
